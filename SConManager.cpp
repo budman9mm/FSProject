@@ -50,16 +50,92 @@ HANDLE FSProject::SConManager::getSimConnectHandle() const {
 
 void FSProject::SConManager::setupClientData() {
     HRESULT hr;
+    //CDU Data
     hr = SimConnect_MapClientDataNameToID(hSimConnect_, PMDG_NG3_CDU_0_NAME, PMDG_NG3_CDU_0_ID);
     hr = SimConnect_AddToClientDataDefinition(hSimConnect_, PMDG_NG3_CDU_0_DEFINITION, 0, sizeof(PMDG_NG3_CDU_Screen), 0, 0);
+    //hr = SimConnect_RequestClientData(hSimConnect_, PMDG_NG3_CDU_0_ID, CDU0_REQUEST, PMDG_NG3_CDU_0_DEFINITION,
+      //  SIMCONNECT_CLIENT_DATA_PERIOD_VISUAL_FRAME, SIMCONNECT_CLIENT_DATA_REQUEST_FLAG_CHANGED, 0, 0, 0);
     hr = SimConnect_RequestClientData(hSimConnect_, PMDG_NG3_CDU_0_ID, CDU0_REQUEST, PMDG_NG3_CDU_0_DEFINITION,
-        SIMCONNECT_CLIENT_DATA_PERIOD_VISUAL_FRAME, SIMCONNECT_CLIENT_DATA_REQUEST_FLAG_CHANGED, 0, 0, 0);
+        SIMCONNECT_CLIENT_DATA_PERIOD_ON_SET, SIMCONNECT_CLIENT_DATA_REQUEST_FLAG_CHANGED, 0, 0, 0);
+	//PMDG Data
     hr = SimConnect_MapClientDataNameToID(hSimConnect_, PMDG_NG3_DATA_NAME, PMDG_NG3_DATA_ID);
     hr = SimConnect_AddToClientDataDefinition(hSimConnect_, PMDG_NG3_DATA_DEFINITION, 0, sizeof(PMDG_NG3_Data), 0, 0);
     hr = SimConnect_RequestClientData(hSimConnect_, PMDG_NG3_DATA_ID, PM_DATA_REQUEST, PMDG_NG3_DATA_DEFINITION,
         SIMCONNECT_CLIENT_DATA_PERIOD_ON_SET, SIMCONNECT_CLIENT_DATA_REQUEST_FLAG_CHANGED, 0, 0, 0);
+	//PMDG Control
     hr = SimConnect_RequestClientData(hSimConnect_, PMDG_NG3_CONTROL_ID, PM_CONTROL_REQUEST, PMDG_NG3_CONTROL_DEFINITION,
         SIMCONNECT_CLIENT_DATA_PERIOD_ON_SET, SIMCONNECT_CLIENT_DATA_REQUEST_FLAG_CHANGED, 0, 0, 0);
+	//CDU0 Keyboard
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L1, "#70166");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L2, "#70167");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L3, "#70168");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L4, "#70169");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L5, "#70170");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L6, "#70171");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R1, "#70172");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R2, "#70173");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R3, "#70174");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R4, "#70175");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R5, "#70176");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R6, "#70177");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_INIT_REF, "#70178");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_RTE, "#70179");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_CLB, "#70180");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_CRZ, "#70181");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_DES, "#70182");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_MENU, "#70183");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_LEGS, "#70184");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_DEP_ARR, "#70185");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_HOLD, "#70186");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_PROG, "#70187");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_EXEC, "#70188");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_N1_LIMIT, "#70189");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_FIX, "#70190");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_PREV_PAGE, "#70191");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_NEXT_PAGE, "#70192");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_1, "#70193");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_2, "#70194");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_3, "#70195");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_4, "#70196");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_5, "#70197");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_6, "#70198");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_7, "#70199");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_8, "#70200");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_9, "#70201");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_DOT, "#70202");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_0, "#70203");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_PLUS_MINUS, "#70204");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_A, "#70205");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_B, "#70206");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_C, "#70207");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_D, "#70208");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_E, "#70209");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_F, "#70210");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_G, "#70211");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_H, "#70212");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_I, "#70213");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_J, "#70214");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_K, "#70215");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_L, "#70216");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_M, "#70217");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_N, "#70218");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_O, "#70219");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_P, "#70220");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_Q, "#70221");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_R, "#70222");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_S, "#70223");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_T, "#70224");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_U, "#70225");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_V, "#70226");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_W, "#70227");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_X, "#70228");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_Y, "#70229");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_Z, "#70230");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_SPACE, "#70231");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_DEL, "#70232");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_SLASH, "#70233");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_CLR, "#70234");
+    hr = SimConnect_MapClientEventToSimEvent(hSimConnect_, EVT_CDU_L_BRITENESS, "#70237");
 }
 
 void FSProject::SConManager::dispatchCallback(SIMCONNECT_RECV* pData, DWORD cbData, void* pContext) {
@@ -96,7 +172,7 @@ void FSProject::SConManager::dispatchCallback(SIMCONNECT_RECV* pData, DWORD cbDa
             }
 
             // Debug: Raw symbol grid (hex)
-            std::cout << "CDU0 Symbol Grid (24x14, raw hex):\n";
+            /*std::cout << "CDU0 Symbol Grid (24x14, raw hex):\n";
             for (int row = 0; row < CDU_ROWS; ++row) {
                 for (int col = 0; col < CDU_COLUMNS; ++col) {
                     unsigned char symbol = static_cast<unsigned char>(cduData->Cells[col][row].Symbol);
@@ -148,7 +224,17 @@ void FSProject::SConManager::dispatchCallback(SIMCONNECT_RECV* pData, DWORD cbDa
             std::cout << std::dec << std::endl;
 
             std::cout << "Sending CDU0 update, size: " << fullPackage.length() << " bytes (plus #X)\n";
+            */
             manager->cdu0_.sendCDU0Update(cdu0Data);
+        }
+		else if (clientData->dwRequestID == PM_DATA_REQUEST) {
+			PMDG_NG3_Data* pmData = reinterpret_cast<PMDG_NG3_Data*>(&clientData->dwData);
+			// Process PMDG data here
+			// Example: std::cout << "PMDG Data: " << pmData->someField << std::endl;
+		}
+        else if (clientData->dwRequestID == PM_CONTROL_REQUEST) {
+            // Handle PMDG control data here
+            // Example: std::cout << "PMDG Control Data: " << clientData->dwData << std::endl;
         }
     }
     break;
