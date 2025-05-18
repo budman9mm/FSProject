@@ -1,7 +1,7 @@
 #define WIN32_LEAN_AND_MEAN
 #pragma warning(disable: 4996) // Suppress CRT secure warnings
 #pragma warning(disable: 28182) // Suppress Winsock deprecated warnings
- 
+
 #include "CDU0Manager.h"
 #include <windows.h>
 #include <cstdio>
