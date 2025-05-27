@@ -5,17 +5,22 @@
 #include "CDU0Manager.h"
 #include <windows.h>
 #include <cstdio>
+#include <stdexcept>
 
 CDU0Manager::CDU0Manager(const std::string& ip, int port) : ip_(ip), port_(port), serverSock_(INVALID_SOCKET), clientSock_(INVALID_SOCKET) {
-    WSADATA wsaData;
-    WSAStartup(MAKEWORD(2, 2), &wsaData);
-    serverSock_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    sockaddr_in addr;
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(port_);
-    inet_pton(AF_INET, ip_.c_str(), &addr.sin_addr);
-    bind(serverSock_, (sockaddr*)&addr, sizeof(addr));
-    listen(serverSock_, 5);
+   WSADATA wsaData;
+   int result = WSAStartup(MAKEWORD(2, 2), &wsaData);
+   if (result != 0) {
+       fprintf(stderr, "WSAStartup failed with error: %d\n", result);
+       throw std::runtime_error("Failed to initialize Winsock.");
+   }
+   serverSock_ = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+   sockaddr_in addr;
+   addr.sin_family = AF_INET;
+   addr.sin_port = htons(port_);
+   inet_pton(AF_INET, ip_.c_str(), &addr.sin_addr);
+   bind(serverSock_, (sockaddr*)&addr, sizeof(addr));
+   listen(serverSock_, 5);
 }
 
 CDU0Manager::~CDU0Manager() {
@@ -33,7 +38,7 @@ void CDU0Manager::sendCDU0Update(const PMDG_CDU0_Data& data) {
         char packet[1011];
         snprintf(packet, sizeof(packet), "#X%s\n", formatCDU0Data(data).c_str());
         sendNonBlockingTCP(clientSock_, packet);
-        //printf_s("#X%s", formatCDU0Data(data).c_str());
+        printf_s("#X%s", formatCDU0Data(data).c_str());
     }
 }
 
