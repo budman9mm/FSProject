@@ -38,7 +38,7 @@ void CDU0Manager::sendCDU0Update(const PMDG_CDU0_Data& data) {
         char packet[1011];
         snprintf(packet, sizeof(packet), "#X%s\n", formatCDU0Data(data).c_str());
         sendNonBlockingTCP(clientSock_, packet);
-        printf_s("#X%s", formatCDU0Data(data).c_str());
+        //printf_s("#X%s", formatCDU0Data(data).c_str());
     }
 }
 

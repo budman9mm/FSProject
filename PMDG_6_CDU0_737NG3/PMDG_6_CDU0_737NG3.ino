@@ -306,11 +306,12 @@ void POUND(int sz, char *msg) {
         }
       }
       //Debugging Section
-      
-        //Display the display chars
+      /*
+        //Display the chars
         for (int i = 0; i < 14; ++i) {
         for (int j = 0; j < 24; ++j) {
-          Serial.write(symbol[j][i][0]);
+          //Serial.write(symbol[j][i][0]); //Show Character
+          Serial.print(symbol[j][i][0]); //Show DEC
         }
         Serial.println();
         }
@@ -328,7 +329,7 @@ void POUND(int sz, char *msg) {
         }
         Serial.println();
         }
-      
+      */
       break;
     case 'R': //Forced screen refresh request
       //Serial << "Got an R!" << endl;
